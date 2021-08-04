@@ -35,10 +35,12 @@ class ApiDaySummary(ApiMercadoBitcoin):
         return f'{self.base_endpoint}/{self.coin}/day-summary/{date.year}/{date.month}/{date.day}'
 
 class ApiTrades(ApiMercadoBitcoin):
-    def _get_date_unix(self, date: datetime.datetime) -> int:
-        return int(date.timestamp())
+    def _get_date_unix(self, day: datetime.datetime) -> int:
+        return int(day.timestamp())
 
     def _get_endpoint(self, day: datetime.datetime) -> str:
-        day_unix = self._get_date_unix(day)
-        
-        return f'{self.base_endpoint}/{self.coin}/trades/{day_unix}'
+        if day == datetime.datetime.today():
+            raise RuntimeError("Can't request for current day.")
+        else:
+            day_unix = self._get_date_unix(day)
+            return f'{self.base_endpoint}/{self.coin}/trades/{day_unix}'

@@ -39,7 +39,7 @@ class ApiTrades(ApiMercadoBitcoin):
         return int(day.timestamp())
 
     def _get_endpoint(self, day: datetime.datetime) -> str:
-        if day == datetime.datetime.today():
+        if day == datetime.datetime.today().strftime('%Y-%m-%d'):
             raise RuntimeError("Can't request for current day.")
         else:
             day_unix = self._get_date_unix(day)

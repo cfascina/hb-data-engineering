@@ -18,6 +18,7 @@ class TestApiDaySummary:
     def test_get_endpoint(self, coin, date, expected):
         api = ApiDaySummary(coin = coin)
         actual = api._get_endpoint(date = date)
+        
         assert actual == expected
 
 class TestApiTrades:
@@ -47,5 +48,5 @@ class TestApiTrades:
 
     def test_get_endpoint_current_day(self):
         with pytest.raises(RuntimeError):
-            ApiTrades(coin = 'ND')._get_endpoint(day = datetime.datetime.today())
+            ApiTrades(coin = 'ND')._get_endpoint(day = datetime.datetime.today().strftime('%Y-%m-%d'))
 

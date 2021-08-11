@@ -1,8 +1,8 @@
 import datetime
 
 from abc import ABC, abstractmethod
+from mercado_bitcoin.apis import ApiDaySummary, ApiTrades
 from os import write
-from apis import ApiDaySummary, ApiTrades
 
 class DataIngestor(ABC):
     def __init__(self, writer, coins, default_date_from: datetime.date) -> None:

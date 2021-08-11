@@ -6,12 +6,12 @@ from os import read
 import pytest
 from unittest import mock
 
-from ingestors import DataIngestor
+from mercado_bitcoin.ingestors import DataIngestor
+from mercado_bitcoin.writers import DataWriter
 from unittest.mock import mock_open, patch
-from writers import DataWriter
 
 @pytest.fixture
-@patch("ingestors.DataIngestor.__abstractmethods__", set())
+@patch("mercado_bitcoin.ingestors.DataIngestor.__abstractmethods__", set())
 def fixture_data_ingestor():
     return (
         DataIngestor(
@@ -29,7 +29,7 @@ class TestDataIngestor:
         assert actual == expected
 
     @patch("builtins.open", new_callable = mock_open, read_data = '1990-11-14')
-    @patch("ingestors.DataIngestor._checkpoint_filename", return_value = 'foo.checkpoint')
+    @patch("mercado_bitcoin.ingestors.DataIngestor._checkpoint_filename", return_value = 'foo.checkpoint')
     def test_save_checkpoint(self, mock_file, mock_with_open, fixture_data_ingestor):
         fixture_data_ingestor._save_checkpoint()
         mock_with_open.assert_called_with(mock_file, 'w')
@@ -47,7 +47,7 @@ class TestDataIngestor:
 
         assert actual == expected
 
-    @patch("ingestors.DataIngestor._save_checkpoint", return_value = None)
+    @patch("mercado_bitcoin.ingestors.DataIngestor._save_checkpoint", return_value = None)
     def test_update_checkpoint_by_value(self, mock, fixture_data_ingestor):
         fixture_data_ingestor._update_checkpoint(datetime.date(1990, 11, 14))
         actual = fixture_data_ingestor._checkpoint
@@ -55,7 +55,7 @@ class TestDataIngestor:
 
         assert actual == expected
     
-    @patch("ingestors.DataIngestor._save_checkpoint", return_value = None)
+    @patch("mercado_bitcoin.ingestors.DataIngestor._save_checkpoint", return_value = None)
     def test_update_checkpoint_by_method(self, mock, fixture_data_ingestor):
         fixture_data_ingestor._update_checkpoint('')
         mock.assert_called_once()

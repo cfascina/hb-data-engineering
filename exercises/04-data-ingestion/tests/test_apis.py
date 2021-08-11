@@ -5,11 +5,11 @@ import datetime
 import pytest
 import requests
 
-from apis import ApiMercadoBitcoin, ApiDaySummary, ApiTrades
+from mercado_bitcoin.apis import ApiMercadoBitcoin, ApiDaySummary, ApiTrades
 from unittest.mock import patch
 
-@pytest.fixture()
-@patch("apis.ApiMercadoBitcoin.__abstractmethods__", set())
+@pytest.fixture
+@patch("mercado_bitcoin.apis.ApiMercadoBitcoin.__abstractmethods__", set())
 def fixture_api_mercado_bitcoin():
     return ApiMercadoBitcoin(coin = 'ND')
 
@@ -34,14 +34,14 @@ def mocked_requests_get(*args, **kwargs):
 
 class TestApiMercadoBitcoin:
     @patch("requests.get")
-    @patch("apis.ApiMercadoBitcoin._get_endpoint", return_value = 'Request done.')
+    @patch("mercado_bitcoin.apis.ApiMercadoBitcoin._get_endpoint", return_value = 'Request done.')
     def test_get_data_request(self, mock_get_endpoint, mock_requests, fixture_api_mercado_bitcoin):
         fixture_api_mercado_bitcoin.get_data()
 
         mock_requests.assert_called_once_with('Request done.')
 
     @patch("requests.get", side_effect = mocked_requests_get)
-    @patch("apis.ApiMercadoBitcoin._get_endpoint", return_value = 'Response success.')
+    @patch("mercado_bitcoin.apis.ApiMercadoBitcoin._get_endpoint", return_value = 'Response success.')
     def test_get_data_response_success(self, mock_get_endpoint, mock_requests, fixture_api_mercado_bitcoin):
         actual = fixture_api_mercado_bitcoin.get_data()
         expected = {"foo": "bar"}
@@ -49,7 +49,7 @@ class TestApiMercadoBitcoin:
         assert actual == expected
 
     @patch("requests.get", side_effect = mocked_requests_get)
-    @patch("apis.ApiMercadoBitcoin._get_endpoint", return_value = 'Response failure.')
+    @patch("mercado_bitcoin.apis.ApiMercadoBitcoin._get_endpoint", return_value = 'Response failure.')
     def test_get_data_response_failure(self, mock_get_endpoint, mock_requests, fixture_api_mercado_bitcoin):
         with pytest.raises(Exception):
             fixture_api_mercado_bitcoin.get_data()

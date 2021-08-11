@@ -1,0 +1,9 @@
+Command options wih pytest:
+python -m pytest
+python -m pytest {folder}/{file}.py
+pytest
+pytest {folder}/{file}.py
+
+Command options wih pytest-cov:
+python -m pytest --cov={app_folder} {tests_folder}/
+pytest --cov=mercado_bitcoin tests/

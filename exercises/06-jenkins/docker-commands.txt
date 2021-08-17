@@ -1,0 +1,12 @@
+- Dockerfile:
+docker build -t pyjenkins .
+docker image ls
+docker ps
+
+- docker-compose.yml:
+docker-compose up
+docker-compose down
+docker-compose ps
+
+- To open image terminal:
+docker exec -it {container_id} bash -l

@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "aws-lambda"
+version = "0.1.0"
+description = ""
+authors = ["Caio <cfascina@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.26.0"
+ratelimit = "^2.2.1"
+backoff = "^1.11.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

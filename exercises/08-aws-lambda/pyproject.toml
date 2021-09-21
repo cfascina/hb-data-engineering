@@ -9,6 +9,8 @@ python = "^3.8"
 requests = "^2.26.0"
 ratelimit = "^2.2.1"
 backoff = "^1.11.1"
+boto3 = "^1.18.41"
+schedule = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
 

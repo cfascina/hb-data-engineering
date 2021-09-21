@@ -1,6 +1,10 @@
+import boto3
 import datetime
 import json
 import os
+
+from tempfile import NamedTemporaryFile
+
 
 class DataTypeUnsupported(Exception):
     def __init__(self, data) -> None:
@@ -20,7 +24,7 @@ class DataWriter:
         with open(self.file_name, 'a') as f:
             f.write(row)
 
-    def write(self, data):
+    def _write_to_file(self, data):
         if isinstance(data, dict):
             self._write_row(json.dumps(data) + '\n')
         elif isinstance(data, list):
@@ -28,3 +32,28 @@ class DataWriter:
                 self.write(item)
         else:
             raise DataTypeUnsupported(data)
+
+    def write(self, data):
+        self._write_to_file(data = data)
+
+class S3DataWriter(DataWriter):
+    def __init__(self, api: str, coin: str) -> None:
+        super().__init__(api, coin)
+        self.temp_file = NamedTemporaryFile()
+        self.client = boto3.client('s3')
+        self.key = f'mercadobitcoin/{self.api}/coin={self.coin}/extracted-at={datetime.datetime.now().date()}/{datetime.datetime.now()}.json'
+
+    def _write_row(self, row: str) -> str:
+        with open(self.temp_file.name, 'a') as f:
+            f.write(row)
+
+    def write(self, data):
+        self._write_to_file(data = data)
+        self.write_at_s3()
+
+    def write_at_s3(self):
+        self.client.put_object(
+            Body = self.temp_file,
+            Bucket = 'mercadobitcoin',
+            Key = self.key
+        )

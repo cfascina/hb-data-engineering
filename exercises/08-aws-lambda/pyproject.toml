@@ -11,8 +11,10 @@ ratelimit = "^2.2.1"
 backoff = "^1.11.1"
 boto3 = "^1.18.41"
 schedule = "^1.1.0"
+pynamodb = "^5.1.0"
 
 [tool.poetry.dev-dependencies]
+black = "^21.9b0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

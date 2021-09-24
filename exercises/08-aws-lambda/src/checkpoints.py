@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import logging
 
 from pynamodb.models import Model
@@ -27,18 +27,11 @@ class DynamoCheckpoints:
     def get_checkpoint(self):
         if self.has_checkpoint:
             checkpoint = list(self.model.query(self.report_id))[0].checkpoint_date
-            return datetime.datetime.strptime(checkpoint, "%Y-%m-%d").date()
+            logger.info(f"Checkpoint found for {self.report_id}: {checkpoint}")
+            return datetime.strptime(checkpoint, "%Y-%m-%d").date()
         else:
-            logger.info(
-                f"Checkpoint not found for {self.report_id} using default_start_date."
-            )
+            logger.info(f"Checkpoint not found for {self.report_id} using default_start_date.")
             return self.default_start_date
-
-    def create_table(self):
-        logger.info("Creating Dynamo table...")
-
-        if not self.model.exists():
-            self.model.create_table(billing_mode="PAY_PER_REQUEST", wait=True)
 
     def create_checkpoint(self, date):
         checkpoint = self.model(self.report_id, checkpoint_date=f"{date}")
@@ -64,3 +57,9 @@ class DynamoCheckpoints:
             self.create_checkpoint(date)
         else:
             self.update_checkpoint(date)
+
+    def create_table(self):
+        logger.info("Creating Dynamo table...")
+
+        if not self.model.exists():
+            self.model.create_table(billing_mode="PAY_PER_REQUEST", wait=True)

@@ -51,9 +51,9 @@ class S3DataWriter(DataWriter):
 
     def write(self, data):
         self._write_to_file(data=data)
-        self.write_at_s3()
+        self._write_at_s3()
 
-    def write_at_s3(self):
+    def _write_at_s3(self):
         self.client.put_object(
             Body=self.temp_file, Bucket="mercado-bitcoin", Key=self.key
         )

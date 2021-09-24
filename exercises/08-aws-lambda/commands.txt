@@ -5,5 +5,5 @@ To setup AWS Config File:
 To run:
 1. Create a bucket in AWS and edit writers.py, pasting it in the corresponding places
 2. make init
-3. cd src/
-4. python main.py
+3. source .venv/bin/activate
+3. zappa deploy

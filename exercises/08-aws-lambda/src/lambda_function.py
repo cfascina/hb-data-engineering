@@ -5,7 +5,7 @@ from src.ingestors import IngestorDaySummaryAWS
 from src.writers import S3DataWriter
 
 logger = logging.getLogger()
-logging.basicConfig(level = logging.INFO)
+logging.basicConfig(level=logging.INFO)
 
 
 def lambda_handler(event, context):

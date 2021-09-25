@@ -30,7 +30,9 @@ class DynamoCheckpoints:
             logger.info(f"Checkpoint found for {self.report_id}: {checkpoint}")
             return datetime.strptime(checkpoint, "%Y-%m-%d").date()
         else:
-            logger.info(f"Checkpoint not found for {self.report_id} using default_start_date.")
+            logger.info(
+                f"Checkpoint not found for {self.report_id} using default_start_date."
+            )
             return self.default_start_date
 
     def create_checkpoint(self, date):

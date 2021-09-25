@@ -16,6 +16,8 @@ pynamodb = "^5.1.0"
 [tool.poetry.dev-dependencies]
 black = "^21.9b0"
 zappa = "^0.50.0"
+flake8 = "^3.9.2"
+pre-commit = "^2.15.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

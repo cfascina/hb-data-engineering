@@ -1,9 +1,0 @@
-To setup AWS Config File:
-1. pip install awscli
-2. aws configure
-
-To run:
-1. Create a bucket in AWS and edit writers.py, pasting it in the corresponding places
-2. make init
-3. source .venv/bin/activate
-3. zappa deploy

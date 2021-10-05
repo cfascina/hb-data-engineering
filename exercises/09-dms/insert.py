@@ -48,19 +48,11 @@ dsn = (
     "password = {password} "
     "port = {port} "
     "host = {host}".format(
-<<<<<<< HEAD
-        dbname = "",
-        user = "",
-        password = "",
-        port = "",
-        host = ""
-=======
         dbname = "myapp",
         user = "postgres",
         password = "admin1234",
         port = "5432",
         host = "myapp.cvrrntmi72bm.us-east-1.rds.amazonaws.com"
->>>>>>> cc427fa... AWS Database Migration Service
     )
 )
 

@@ -28,11 +28,11 @@ dsn = (
     "password = {password} "
     "port = {port} "
     "host = {host}".format(
-        dbname = "myapp",
-        user = "postgres",
-        password = "admin1234",
-        port = "5432",
-        host = "myapp.cvrrntmi72bm.us-east-1.rds.amazonaws.com"
+        dbname = "",
+        user = "",
+        password = "",
+        port = "",
+        host = ""
     )
 )
 

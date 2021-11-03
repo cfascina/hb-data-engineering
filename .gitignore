@@ -12,3 +12,6 @@ __pycache__
 
 # Jenkins
 jenkins_home
+
+# Airlflow Logs
+exercises/11-airflow/logs/*

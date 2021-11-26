@@ -1,0 +1,23 @@
+Description: Cria buckets no S3
+
+
+Resources:
+
+  BucketBeliscoNaPracinha:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      BucketName: bucket-belisco-na-pracinha
+
+  BucketBeliscoNaPracinhaDeNoite:
+    DeletionPolicy: Retain
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      BucketName: bucket-belisco-na-pracinha-de-noite
